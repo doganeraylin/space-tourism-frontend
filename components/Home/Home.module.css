@@ -1,0 +1,51 @@
+.container {
+    background-image: url('/assets/home/background-home-mobile.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100% 100%;
+
+}
+
+.title,
+.description {
+    font-size: 1rem;
+    color: var(--light-blue);
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: 0.2rem;
+    padding: 2rem 0 1rem;
+}
+
+.title span {
+    display: block;
+    font-size: 5rem;
+    margin-top: 1.25rem;
+    color: var(--white);
+}
+
+.title span,
+.exploreBtn {
+    font-family: var(--bellefair);
+    text-transform: uppercase;
+}
+
+.description {
+    font-family: var(--barlow);
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    padding: 0 0.50rem;
+}
+
+.exploreBtn {
+    width: 150px;
+    height: 150px;
+    background-color: var(--white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    letter-spacing: 0.075rem;
+    margin: 3rem 0 2rem;
+}
