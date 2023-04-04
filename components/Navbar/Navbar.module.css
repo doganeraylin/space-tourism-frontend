@@ -1,0 +1,14 @@
+.navbarToggler,
+.navbarToggler:focus,
+.navbarToggler:active,
+.navbarToggleIcon:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+
+.links {
+    color: var(--white);
+    font-family: var(--bellefair);
+}
