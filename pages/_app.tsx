@@ -1,9 +1,15 @@
-import type { AppProps } from 'next/app';
+
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../styles/globals.css";
+import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client';
 import useApollo from '../hooks/useApollo';
-import '../styles/globals.css';
+import { useEffect } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
   const client = useApollo(pageProps);
   return (
     <ApolloProvider client={client}>
@@ -11,4 +17,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ApolloProvider>
   );
 }
-export default MyApp;
