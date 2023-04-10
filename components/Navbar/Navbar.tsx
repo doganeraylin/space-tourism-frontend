@@ -13,26 +13,23 @@ const Navbar = () => {
     return (
     <>
     <nav className={`${styles.navbarContainer} navbar navbar-expand-md`}>
-        <div className="container-fluid" >
-            <img className={styles.logoImg} src="./assets/header/logo.png" alt='user profile picture' />
-            <button className={`${styles.navbarToggler} navbar-toggler`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <img className={styles.logoImg} src="./assets/header/logo.png" alt='user profile picture' />
+        <button className={`${styles.navbarToggler} navbar-toggler`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className={`${styles.navbarTogglerIcon} navbar-toggler-icon`}></span>
-            </button>
-            <div className="collapse navbar-collapse pt-3" id="navbarSupportedContent">
-            <ul className="navbar-nav mb-2 mb-lg-0 ">
+        </button>
+        <div className="collapse navbar-collapse d-md-flex justify-content-md-end align-items-md-start" id="navbarSupportedContent">
+            <ul className={`${styles.linksContainer} navbar-nav mb-2 mb-md-0`}>
                 {links.map((link, index) => (
                     <Link 
-                        key={index}
-                        className="text-decoration-none px-md-2" 
+                        key={index} 
                         href={link.href}>
-                        <div className={`${styles.links} py-2 text-uppercase`}>
-                            <span className="fw-bold me-2">{link.pageNumber}</span>
+                        <div className={styles.links}>
+                            <span className="fw-bold me-2 d-md-none">{link.pageNumber}</span>
                             {link.text}
                         </div>
                     </Link>
-              ))}
+                ))}
             </ul>
-            </div>
         </div>
     </nav>
     </>
