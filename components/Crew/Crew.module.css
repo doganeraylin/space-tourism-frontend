@@ -1,0 +1,68 @@
+.wrapper {
+    max-width: 320px;
+}
+
+.tabsContainer {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 10rem;
+}
+
+.imgContainer {
+    margin: 2rem 2.5rem 0;
+    border-bottom: 1px solid #383B4B;
+}
+
+.tabBtn {
+    border: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+}
+
+/* typography */
+
+.role,
+.fullName,
+.title {
+    text-transform: uppercase;
+}
+
+.role,
+.fullName {
+    font-family: var(--bellefair);
+    color: var(--white);
+}
+
+.fullName {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+}
+
+.role {
+    opacity: 0.5;
+    line-height: 1.125rem;
+}
+
+.bio {
+    color: var(--light-blue);
+    font-family: var(--barlow);
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+}
+
+.title {
+    font-family: var(--barlow-condensed);
+    letter-spacing: 0.15rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: var(--white);
+}
+
+.title span {
+    opacity: 0.25;
+    font-weight: 700;
+    margin-right: .75rem;
+}
