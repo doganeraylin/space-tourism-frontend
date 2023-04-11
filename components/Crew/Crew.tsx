@@ -26,18 +26,19 @@ const Crew = () => {
     }
 
     return (
-        <div className={`${styles.container} d-flex flex-column align-items-center`}>
-            <h1 className={styles.title}><span>02</span>meet your crew</h1>
-            <div className={styles.imgContainer}>
-              {imageUrls.map((img, i) => 
-                <div key={i} className="d-flex justify-content-center">
-                    {currentTab === `${i}` && 
-                    <img className={`${styles.crewMemberImg} w-50`} src={img}></img>}
-                </div>
-              )}
+        <div className={styles.wrapper}>
+            <h1 className={`${styles.title} text-center mt-md-5`}><span>02</span>meet your crew</h1>
+            <div className={`${styles.container} d-flex flex-column align-items-center flex-md-column-reverse flex-xl-row-reverse justify-content-xl-between`}>
+                <div className={styles.imgContainer}>
+                {imageUrls.map((img, i) => 
+                    <div key={i} className="d-flex justify-content-center">
+                        {currentTab === `${i}` && 
+                        <img className={`${styles.crewMemberImg}`} src={img}></img>}
+                    </div>
+                )}
             </div >
-            <div className={styles.wrapper}>
-                <div className={`${styles.tabsContainer} d-flex justify-content-evenly w-50 mt-5 mb-5`}>
+            <div className="d-xl-flex flex-xl-column-reverse border border-danger">
+                <div className={`${styles.tabsContainer} d-flex justify-content-evenly my-5 border border-warning`}>
                 {tabs.map((tab, i) =>
                     <button 
                     key={i} 
@@ -48,21 +49,24 @@ const Crew = () => {
                     </button>
                 )}
                 </div>
-                <div>
-                    {crewData.map((crewMember, i) =>
-                        <div key={i}  >
-                            {currentTab === `${i}` && 
-                            <div className="d-flex flex-column align-items-center">
-                                <p className={styles.role}>{crewMember.attributes.role}</p>
-                                <p className={styles.fullName}>{crewMember.attributes.fullName}</p>
-                                <p className={styles.bio}>{crewMember.attributes.bio}</p>
-                            </div>}
-                        </div>
-                    )}
+                    <div>
+                        {crewData.map((crewMember, i) =>
+                            <div key={i}  >
+                                {currentTab === `${i}` && 
+                                <div className={`${styles.textContainer} d-flex flex-column align-items-center align-items-xl-start`}>
+                                    <p className={styles.role}>{crewMember.attributes.role}</p>
+                                    <p className={styles.fullName}>{crewMember.attributes.fullName}</p>
+                                    <p className={`${styles.bio} text-center text-xl-start`}>{crewMember.attributes.bio}</p>
+                                </div>}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
+            );
         </div>
-    );
+       
+    )        
 }
 
 export default Crew
