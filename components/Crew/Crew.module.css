@@ -1,17 +1,26 @@
 .wrapper {
-    max-width: 320px;
+    border: 2px solid blue;
+}
+
+.container {
+    max-width: 325px;
+    margin: 0 auto;
+    border: 1px solid yellow;
+    gap: 2rem;
 }
 
 .tabsContainer {
-    display: flex;
-    justify-content: space-around;
     margin: 0 auto;
     width: 10rem;
 }
 
 .imgContainer {
-    margin: 2rem 2.5rem 0;
+    margin: 1.5rem 0;
     border-bottom: 1px solid #383B4B;
+}
+
+.imgContainer img {
+    max-width: 170px;
 }
 
 .tabBtn {
@@ -48,7 +57,6 @@
 .bio {
     color: var(--light-blue);
     font-family: var(--barlow);
-    text-align: center;
     font-size: 0.9rem;
     line-height: 1.5rem;
 }
@@ -65,4 +73,67 @@
     opacity: 0.25;
     font-weight: 700;
     margin-right: .75rem;
+}
+
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 460px;
+    }
+
+    .imgContainer {
+        border: none;
+    }
+
+    .imgContainer img {
+        max-width: 450px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1100px;
+    }
+
+    .imgContainer img {
+        max-width: 530px;
+    }
+
+    .tabsContainer {
+        margin: 3rem 0 0;
+    }
+
+    .textContainer {
+        max-width: 500px;
+        padding: 10rem 0;
+    }
+
+    .fullName {
+        font-size: 3.5rem;
+        line-height: 3.25rem;
+    }
+
+    .role {
+        font-size: 2rem;
+        line-height: 2.25rem;
+    }
+
+    .bio {
+        font-size: 1.125rem;
+        margin-top: 1rem;
+        line-height: 2rem;
+    }
+
+    .tabBtn {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
 }
