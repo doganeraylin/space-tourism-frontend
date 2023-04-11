@@ -24,8 +24,7 @@ const Navbar = () => {
                         key={index} 
                         href={link.href}>
                         <div className={styles.links}>
-                            <span className="fw-bold me-2 d-md-none">{link.pageNumber}</span>
-                            {link.text}
+                            <p><span className="fw-bold me-2 d-md-none d-xl-inline">{link.pageNumber}</span>{link.text}</p>
                         </div>
                     </Link>
                 ))}
