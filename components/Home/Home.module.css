@@ -1,9 +1,5 @@
 .container {
-    background-image: url('/assets/home/background-home-mobile.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-size: 100% 100%;
-
+    max-width: 325px;
 }
 
 .title,
@@ -16,7 +12,7 @@
     text-transform: uppercase;
     font-weight: normal;
     letter-spacing: 0.2rem;
-    padding: 2rem 0 1rem;
+    margin-top: 4rem;
 }
 
 .title span {
@@ -47,5 +43,50 @@
     border-radius: 50%;
     font-size: 1.25rem;
     letter-spacing: 0.075rem;
-    margin: 3rem 0 2rem;
+    margin: 7rem 0 2rem;
+}
+
+.textContainer {
+    text-align: center;
+}
+
+
+@media (min-width:768px) {
+    .exploreBtn {
+        width: 240px;
+        height: 240px;
+        font-size: 2rem;
+    }
+
+    .textContainer {
+        max-width: 450px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1000px;
+        margin: 9rem auto;
+    }
+
+    .exploreBtn {
+        width: 275px;
+        height: 275px;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .title span {
+        font-size: 9rem;
+    }
+
+    .description {
+        font-size: 1.125rem;
+    }
+
+    .textContainer {
+        text-align: left;
+    }
 }
