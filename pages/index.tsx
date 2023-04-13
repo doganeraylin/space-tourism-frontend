@@ -4,6 +4,9 @@
   import { destinationList } from '../graphql/queries'
   import Navbar from '../components/Navbar/Navbar';
   import Home from '../components/Home/Home'
+  import Crew from '../components/Crew/Crew';
+  import Destination from '../components/Destination/Destination'
+import Technology from '../components/Technology/Technology';
   function Destinations() {
     // <Head>
     //   <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -24,8 +27,15 @@
     // }
 
     return (
-     <>
-     <Home/>
-     </>    );
+      <>
+        <Navbar/>
+        {/* <Home /> */}
+        {/* <Destination/> */}
+        {/* <Crew></Crew> */}
+        <Technology/>
+      </>
+
+         
+    );
 }
 export default Destinations 
