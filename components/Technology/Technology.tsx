@@ -1,43 +1,61 @@
 import { useQuery } from '@apollo/client';
 import { technologyList } from '../../graphql/queries';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 import styles from './Technology.module.css'
 
+
+
+
+
 const Technology = () => {
+    
     const [currentTab, setCurrentTab] = useState('0');
-
+    const [isPortraitFormat, setIsPortraitFormat] = useState(true); 
     const { loading, error, data } = useQuery(technologyList);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    if (!data) return null;
-
-    const technologyData = data.technologies.data
-    const imageUrls = technologyData.map(dest => dest.attributes.image.data[0].attributes.url);
-
     const tabs = [
     { tab: "1", id: "0" },
     { tab: "2", id: "1" },
     { tab: "3", id: "2" },
     ]
+    useEffect(() => {
+    const handleResize = () => {
+        setIsPortraitFormat(window.innerWidth >= 1200);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+        window.removeEventListener('resize', handleResize);
+    }
+    }, []);
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    if (!data) return null;
+
+    const technologyData = data.technologies.data
+    const imgFormats = isPortraitFormat ? technologyData.map(dest => dest.attributes.image.data[1].attributes.url)
+                                         : technologyData.map(dest => dest.attributes.image.data[0].attributes.url);
+ 
 
     const handleTabClick = (e) => {
         setCurrentTab(e.target.id);
     }
 
     return (
-        <div className={`${styles.container} d-flex flex-column align-items-center`}>
-            <h1 className={styles.title}><span>03</span>space launch 101</h1>
-            <div className={styles.imgContainer}>
-              {imageUrls.map((img, i) => 
-                <div key={i} className={styles.techImgContainer}>
-                    {currentTab === `${i}` && 
-                    <img className={`${styles.techImg} w-100`} src={img}></img>}
-                </div>
-              )}
-            </div >
-            <div className={`${styles.wrapper} d-flex flex-column align-items-center`}>
-                <div className={`${styles.tabsContainer} d-flex justify-content-evenly w-75 mt-5 mb-5`}>
+        <>
+        <h1 className={styles.title}><span>03</span>space launch 101</h1>
+        <div className={`${styles.container} d-flex flex-column align-items-center d-xl-flex flex-xl-row-reverse justify-content-xl-between `}> 
+            <div className={`${styles.imgContainer}`}>
+                    {imgFormats.map((img, i) => (
+                    <div key={i} className="">
+                        {currentTab === `${i}` && (
+                            <img className={`${styles.techImg}`} src={img}></img>
+                        )}
+                    </div>
+                ))}
+            </div>
+            <div className={`${styles.wrapper} d-flex flex-column align-items-center flex-xl-row`}>
+                <div className={`${styles.tabsContainer} d-flex justify-content-evenly flex-xl-column w-75 my-5`}>
                 {tabs.map((tab, i) =>
                     <button 
                     key={i} 
@@ -48,22 +66,23 @@ const Technology = () => {
                         {tab.tab}
                     </button>
                 )}
-                </div>
-                <p className={styles.subtitle}>the terminology...</p>
-                <div>
-                    {technologyData.map((tech, i) =>
-                        <div key={i}  >
-                            {currentTab === `${i}` && 
-                            <div className="d-flex flex-column align-items-center">
-                                <p className={styles.term}>{tech.attributes.term}</p>
-                                <p className={styles.description}>{tech.attributes.description}</p>
-                            </div>
-                            }
+            </div>
+            <div>
+                {technologyData.map((tech, i) =>
+                    <div key={i}  >
+                        {currentTab === `${i}` && 
+                        <div className={`${styles.textContainer}d-flex flex-column align-items-center align-items-xl-start`}>
+                            <p className={`${styles.subtitle} text-center text-xl-start`}>the terminology...</p>
+                            <p className={`${styles.term} text-center text-xl-start`}>{tech.attributes.term}</p>
+                            <p className={`${styles.description} text-xl-start`}>{tech.attributes.description}</p>
                         </div>
-                    )}
+                        }
+                    </div>
+                )}
                 </div>
             </div>
         </div>
+    </>
     );
 }
 
