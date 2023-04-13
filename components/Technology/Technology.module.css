@@ -1,10 +1,16 @@
 .container {
     text-transform: uppercase;
     color: white;
+    margin-top: 1.5rem;
 }
 
 .wrapper {
-    max-width: 320px;
+    max-width: 650px;
+    padding: 1rem 1.5rem;
+}
+
+.tabsContainer {
+    max-width: 180px;
 }
 
 .tabBtn {
@@ -28,10 +34,13 @@
 
 .title {
     font-family: var(--barlow-condensed);
+    text-transform: uppercase;
     letter-spacing: 0.15rem;
     font-size: 1rem;
     margin: 1rem 0 1.5rem;
     color: var(--white);
+    text-align: center;
+
 }
 
 .title span {
@@ -60,5 +69,58 @@
     font-family: var(--bellefair);
     font-size: 1.5rem;
     line-height: 1.75rem;
+}
 
+.techImg {
+    max-width: 100%;
+}
+
+
+@media (min-width: 768px) {
+
+    .term {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .container {
+        max-width: 1500px;
+        margin: 0 auto;
+    }
+
+    .tabBtn {
+        width: 60px;
+        height: 60px;
+        margin: 0 1.25rem 1rem 1.5rem;
+    }
+
+    .title {
+        font-size: 1.25rem;
+        margin: 1rem 0 1.5rem 4rem;
+        text-align: left;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .term {
+        font-size: 3.5rem;
+        line-height: 3.5rem;
+    }
+
+    .description {
+        font-size: 1.125rem;
+    }
+
+    .techImg {
+        max-height: 400px;
+    }
 }
