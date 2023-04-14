@@ -1,6 +1,5 @@
 .navbarContainer {
     padding: 0;
-    margin: 1rem auto;
 }
 
 .linksContainer {
@@ -16,7 +15,7 @@
     font-size: .9rem;
     line-height: 1rem;
     letter-spacing: .15rem;
-    padding: 2rem 1.75rem;
+    padding: 2rem 2rem .75rem;
     max-width: 450px;
 }
 
