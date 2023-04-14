@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { crewList } from '../../graphql/queries';
 import { useState } from 'react'
 import styles from './Crew.module.css'
+import Navbar from '../Navbar/Navbar'
 
 const Crew = () => {
     const [currentTab, setCurrentTab] = useState('0');
@@ -26,6 +27,8 @@ const Crew = () => {
     }
 
     return (
+        <>
+        <Navbar />
         <div className={styles.wrapper}>
             <h1 className={`${styles.title} text-center mt-md-5`}><span>02</span>meet your crew</h1>
             <div className={`${styles.container} d-flex flex-column align-items-center flex-md-column-reverse flex-xl-row-reverse justify-content-xl-between`}>
@@ -65,6 +68,8 @@ const Crew = () => {
             </div>
             );
         </div>
+        </>
+    
        
     )        
 }

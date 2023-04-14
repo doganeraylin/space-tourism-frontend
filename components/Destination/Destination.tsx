@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQuery } from '@apollo/client';
 import { destinationList } from '../../graphql/queries';
 import styles from './Destination.module.css'
-
+import Navbar from '../Navbar/Navbar'
 
 interface IDestination {
   id: number;
@@ -52,6 +52,7 @@ const Destination = () => {
 
   return (
     <>
+    <Navbar />
     <div className={`${styles.container} d-flex flex-column align-items-center flex-xl-row justify-content-xl-between`}>
       <div className="d-xl-flex flex-xl-column justify-content-xl-center">
           <div className={`${styles.imgContainer}`}>

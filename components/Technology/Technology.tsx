@@ -1,13 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { technologyList } from '../../graphql/queries';
 import { useState, useEffect } from 'react'
-
+import { setBodyBackgroundImage } from '../Background/Background';
 import styles from './Technology.module.css'
-
-
-
-
-
+import Navbar from '../Navbar/Navbar'
+ 
 const Technology = () => {
     
     const [currentTab, setCurrentTab] = useState('0');
@@ -18,16 +15,26 @@ const Technology = () => {
     { tab: "2", id: "1" },
     { tab: "3", id: "2" },
     ]
+
     useEffect(() => {
     const handleResize = () => {
         setIsPortraitFormat(window.innerWidth >= 1200);
     }
 
     window.addEventListener('resize', handleResize);
-    return () => {
-        window.removeEventListener('resize', handleResize);
-    }
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
     }, []);
+
+    // useEffect(() => {
+    //     console.log("useeffect")
+    //     setBodyBackgroundImage(
+    //     '/background-technology-mobile.jpg', 
+    //     '/background-technology-tablet.jpg', 
+    //     '/background-technology-desktop.jpg');
+    //  }, []);
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     if (!data) return null;
@@ -43,6 +50,7 @@ const Technology = () => {
 
     return (
         <>
+        <Navbar/>
         <h1 className={styles.title}><span>03</span>space launch 101</h1>
         <div className={`${styles.container} d-flex flex-column align-items-center d-xl-flex flex-xl-row-reverse justify-content-xl-between `}> 
             <div className={`${styles.imgContainer}`}>
