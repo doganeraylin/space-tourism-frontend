@@ -1,7 +1,6 @@
 .container,
 .tabBtn {
     text-transform: uppercase;
-    color: white;
 }
 
 .distanceTitle,
@@ -20,8 +19,17 @@
     line-height: 2rem;
 }
 
+.tabBtn,
+.tabBtnSelected,
+.title,
+.name,
+.distance,
+.travelTime {
+    color: var(--white);
+}
+
 .container {
-    max-width: 320px;
+    max-width: 325px;
     margin: 0 auto;
 }
 
@@ -31,12 +39,15 @@
     font-family: var(--barlow-condensed);
     letter-spacing: 0.10rem;
     color: var(--light-blue);
-    ;
-
+    cursor: pointer;
 }
 
 .tabBtn:hover {
-    border-bottom: 2px solid white;
+    border-bottom: 3px solid var(--transparent);
+}
+
+.tabBtnSelected {
+    border-bottom: 3px solid var(--white);
 }
 
 .name {
@@ -47,10 +58,13 @@
 
 .title {
     font-family: var(--barlow-condensed);
+    text-transform: uppercase;
     letter-spacing: 0.15rem;
     font-size: 1rem;
-    margin: 1.5rem 0 2rem;
+    margin: 1rem 0 1.5rem;
     color: var(--white);
+    text-align: center;
+
 }
 
 .title span {
@@ -60,13 +74,12 @@
 }
 
 .description {
-    /* text-align: center; */
     text-transform: none;
     color: var(--light-blue);
     padding-bottom: 1.25rem;
     font-size: .9rem;
     line-height: 1.5rem;
-    border-bottom: 1px solid #383B4B;
+    border-bottom: 1px solid var(--border);
     font-family: var(--barlow);
 }
 
@@ -75,18 +88,20 @@
     max-height: 200px;
 }
 
+/* media queries tablet */
+
 @media (min-width: 768px) {
+
+    .container {
+        max-width: 520px;
+    }
+
     .title {
-        font-size: 1.25rem;
-        margin-top: 4rem;
+        font-size: 1.5rem;
     }
 
     .name {
         font-size: 5rem;
-    }
-
-    .container {
-        max-width: 520px;
     }
 
     .destinationImg {
@@ -95,15 +110,12 @@
     }
 }
 
+/* media queries desktop */
 
 @media (min-width: 1200px) {
+
     .container {
         max-width: 1100px;
-    }
-
-    .destinationImg {
-        max-width: 445px;
-        max-height: 445px;
     }
 
     .destinationInfoWrapper {
@@ -111,7 +123,13 @@
     }
 
     .title {
-        margin: 0;
+        font-size: 2rem;
+        margin: 1rem 0 1.5rem 4rem;
+        text-align: left;
     }
 
+    .destinationImg {
+        max-width: 445px;
+        max-height: 445px;
+    }
 }

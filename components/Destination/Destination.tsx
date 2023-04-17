@@ -1,35 +1,13 @@
 import { useState } from 'react'
 import { useQuery } from '@apollo/client';
 import { destinationList } from '../../graphql/queries';
-import styles from './Destination.module.css'
 import Navbar from '../Navbar/Navbar'
-
-interface IDestination {
-  id: number;
-  attributes: {
-    name: string
-    description: string
-    distance: number
-    travelTime: number
-    distanceUnit: string
-    durationUnit: string
-    image:  IDestinationImg
-  }
-}
-
-interface IDestinationImg {
-  data: {
-    id: number
-    attributes: {
-      url: string
-    }
-  }
-
-}
+import { IDestination } from '../../interface/interfaces'
+import styles from './Destination.module.css'
 
 const Destination = () => {
 
-  const [currentTab, setCurrentTab] = useState('0');
+  const [currentTab, setCurrentTab] = useState<string>('0');
   const tabs = [
     { tab: 'moon', id: "0" },
     { tab: 'mars', id: "1" },
@@ -43,20 +21,21 @@ const Destination = () => {
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return null;
 
-  const destinationData: IDestination[] = data.destinations.data
-  const imageUrls = destinationData.map(dest => dest.attributes.image.data[0].attributes.url);
+  const destinationData: IDestination[] | undefined = data?.destinations?.data
+  const imageUrls: string[] = destinationData.map((dest: IDestination) => dest?.attributes?.image?.data[0]?.attributes?.url) ?? [];
 
-  const handleTabClick = (e) => {
-      setCurrentTab(e.target.id);
+  const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const tabId = e.currentTarget.id; 
+    setCurrentTab(tabId);
   }
 
   return (
     <>
     <Navbar />
+    <h1 className={`${styles.title} my-md-5`}><span>02</span>pick your destination</h1>
     <div className={`${styles.container} d-flex flex-column align-items-center flex-xl-row justify-content-xl-between`}>
       <div className="d-xl-flex flex-xl-column justify-content-xl-center">
           <div className={`${styles.imgContainer}`}>
-            <h1 className={`${styles.title} mb-xl-5`}><span>02</span>pick your destination</h1>
             {imageUrls.map((img, i) => 
             <div key={i} className="d-md-flex justify-content-md-center">
               {currentTab === `${i}` && 
@@ -73,8 +52,9 @@ const Destination = () => {
               id={tab.id} 
               disabled={currentTab === `${tab.id}`} 
               onClick={(handleTabClick)}
-              className={styles.tabBtn}>
-                {tab.tab}
+              className={currentTab === tab.id ? `${styles.tabBtn} ${styles.tabBtnSelected}` : `${styles.tabBtn}`}
+            > 
+              {tab.tab}
             </button>
         )}
         </div>
@@ -84,7 +64,7 @@ const Destination = () => {
                 {currentTab === `${i}` && 
                 <div className={`${styles.textContainer} d-flex flex-column align-items-center align-items-xl-start`}>
                   <p className={styles.name}>{dest.attributes.name}</p>
-                  <p className={`${styles.description} text-md-center text-xl-start`}>{dest.attributes.description}</p>
+                  <p className={`${styles.description} text-center text-xl-start`}>{dest.attributes.description}</p>
                   <div className="d-md-flex justify-content-md-around w-100 justify-content-xl-start">
                     <div className="text-center text-xl-start me-xl-5">
                       <p className={styles.distanceTitle}>avg.distance</p>
