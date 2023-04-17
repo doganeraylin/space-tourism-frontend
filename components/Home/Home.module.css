@@ -44,29 +44,47 @@
     font-size: 1.25rem;
     letter-spacing: 0.075rem;
     margin: 7rem 0 2rem;
+    transition: 0.3s;
 }
+
+.exploreBtn:hover {
+    outline: 3rem solid var(--transparent);
+}
+
 
 .textContainer {
     text-align: center;
 }
 
 
+/* media queries tablet */
+
 @media (min-width:768px) {
+
+    .textContainer {
+        max-width: 450px;
+    }
+
     .exploreBtn {
         width: 240px;
         height: 240px;
         font-size: 2rem;
     }
 
-    .textContainer {
-        max-width: 450px;
-    }
+
 }
 
+/* media queries desktop */
+
 @media (min-width: 1200px) {
+
     .container {
         max-width: 1000px;
         margin: 9rem auto;
+    }
+
+    .textContainer {
+        text-align: left;
     }
 
     .exploreBtn {
@@ -86,7 +104,5 @@
         font-size: 1.125rem;
     }
 
-    .textContainer {
-        text-align: left;
-    }
+
 }
