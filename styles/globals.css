@@ -3,13 +3,15 @@
 
 :root {
   --dark-bg: #0B0D17;
+  --border: #383B4B;
+  --transparent: rgba(255, 255, 255, 0.1);
+  --shadow: #00000040;
   --light-blue: #D0D6F9;
   --white: #FFF;
   --bellefair: 'Bellefair', serif;
   --barlow-condensed: 'Barlow Condensed', sans-serif;
   --barlow: 'Barlow', sans-serif;
 }
-
 
 html,
 body {
@@ -20,20 +22,13 @@ body {
 }
 
 body {
-  background-color: #0B0D17;
-  /* background-image: url("../public/assets/crew/background-crew-mobile.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed; */
+  background-color: var(--dark-bg);
 }
 
 html {
   height: 100%;
 }
 
-body {
-  min-height: 100%;
-}
 
 a {
   color: inherit;
