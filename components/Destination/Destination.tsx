@@ -1,17 +1,17 @@
 import { useRef, useEffect, useState } from 'react'
-import { useQuery } from '@apollo/client';
-import { destinationList } from '../../graphql/queries';
+import { useQuery } from '@apollo/client'
+import { destinationList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
 import { IDestination } from '../../interface/interfaces'
 import { gsap } from "gsap"
 import styles from './Destination.module.css'
 
 const Destination = () => {
-  const [currentTab, setCurrentTab] = useState<string>('0');
-  const currentTabRef = useRef(null); 
+  const [currentTab, setCurrentTab] = useState<string>('0')
+  const currentTabRef = useRef(null) 
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    const tl = gsap.timeline()
 
     tl.to(currentTabRef.current, {
       duration: 1,
@@ -22,12 +22,12 @@ const Destination = () => {
       duration: 1,
       opacity: 1,
       ease: 'power2.out',
-    });
+    })
 
     return () => {
-      tl.kill();
-    };
-  }, [currentTab]);
+      tl.kill()
+    }
+  }, [currentTab])
 
   const tabs = [
     { tab: 'moon', id: "0" },
@@ -36,18 +36,18 @@ const Destination = () => {
     { tab: 'titan', id: "3" },
   ]
 
-  const { loading, error, data } = useQuery(destinationList);
+  const { loading, error, data } = useQuery(destinationList)
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return null;
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>
+  if (!data) return null
 
   const destinationData: IDestination[] | undefined = data?.destinations?.data
-  const imageUrls: string[] = destinationData.map((dest: IDestination) => dest?.attributes?.image?.data[0]?.attributes?.url) ?? [];
+  const imageUrls: string[] = destinationData.map((dest: IDestination) => dest?.attributes?.image?.data[0]?.attributes?.url) ?? []
 
   const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const tabId = e.currentTarget.id; 
-    setCurrentTab(tabId);
+    const tabId = e.currentTarget.id 
+    setCurrentTab(tabId)
   }
 
   return (
@@ -106,5 +106,5 @@ const Destination = () => {
   )
 }
 
-export default Destination;
+export default Destination
 
