@@ -3,9 +3,7 @@ import { useRouter } from 'next/router'
 import { gsap } from "gsap";
 import styles from './Home.module.css'
 
-
 const Home = () => {
-
     const exploreBtnExpand = useRef()
     const exploreBtnRotate = useRef()
     const router = useRouter()
@@ -40,18 +38,22 @@ const Home = () => {
 
 
     useEffect(() => {
-    let ctx = gsap.context(() => {
-        gsap.to(exploreBtnRotate.current, { rotation: "+=460", duration: 3, y: -100, repeat: -1, yoyo: true});
-    }, exploreBtnRotate);
-    return () => {
-        ctx.kill()
-    }
+        let ctx = gsap.context(() => {
+            gsap.to(exploreBtnRotate.current, 
+                { rotation: "+=460", 
+                  duration: 3, 
+                  y: -90, 
+                  repeat: -1, 
+                  yoyo: true});
+        }, exploreBtnRotate);
+            return () => {
+                ctx.kill()
+            }
     }, []);
  
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        
-        setBtnEffect(true)
         e.preventDefault()
+        setBtnEffect(true)
     }
 
     return (
