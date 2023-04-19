@@ -1,5 +1,6 @@
 .container {
     max-width: 325px;
+    margin: 10% auto;
 }
 
 .title,
@@ -44,7 +45,6 @@
     font-size: 1.25rem;
     letter-spacing: 0.075rem;
     margin: 7rem 0 2rem;
-    transition: 0.3s;
 }
 
 .exploreBtn:hover {

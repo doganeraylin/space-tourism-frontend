@@ -30,7 +30,7 @@
 
 .container {
     max-width: 325px;
-    margin: 0 auto;
+    margin: 10% auto;
 }
 
 .tabBtn {
@@ -87,6 +87,7 @@
     max-width: 200px;
     max-height: 200px;
 }
+
 
 /* media queries tablet */
 
