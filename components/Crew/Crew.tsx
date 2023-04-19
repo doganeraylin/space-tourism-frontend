@@ -1,12 +1,35 @@
-import { useState } from 'react'
-import { useQuery } from '@apollo/client';
-import { crewList } from '../../graphql/queries';
+import { useRef, useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { crewList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
 import { ICrew } from '../../interface/interfaces'
+import { gsap } from "gsap"
 import styles from './Crew.module.css'
 
 const Crew = () => {
-    const [currentTab, setCurrentTab] = useState<string>('0');
+  const [currentTab, setCurrentTab] = useState<string>('0')
+  const currentTabRef = useRef(null) 
+
+  useEffect(() => {
+    const tl = gsap.timeline()
+
+    tl.to(currentTabRef.current, {
+        duration: 1,
+        opacity: 0,
+        ease: 'back.out(1)',
+        x: -200,
+    })
+    tl.to(currentTabRef.current, {
+        duration: 1,
+        opacity: 1,
+        x: 0,
+    })
+
+    return () => {
+      tl.kill()
+    }
+  }, [currentTab])
+
     const tabs = [
     { tab: "0", id: "0" },
     { tab: "1", id: "1" },
@@ -14,25 +37,25 @@ const Crew = () => {
     { tab: "3", id: "3" }
     ]
 
-    const { loading, error, data } = useQuery(crewList);
+    const { loading, error, data } = useQuery(crewList)
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    if (!data) return null;
+    if (loading) return <div>Loading...</div>
+    if (error) return <div>Error: {error.message}</div>
+    if (!data) return null
 
     const crewData: ICrew[] | undefined = data?.crews?.data
-    const imageUrls: string[] = crewData.map((crew: ICrew) => crew?.attributes?.image?.data?.attributes?.url) ?? [];
+    const imageUrls: string[] = crewData.map((crew: ICrew) => crew?.attributes?.image?.data?.attributes?.url) ?? []
 
     const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const tabId = e.currentTarget.id; 
-        setCurrentTab(tabId);
+        const tabId = e.currentTarget.id 
+        setCurrentTab(tabId)
     }
 
     return (
         <>
         <Navbar />
         <h1 className={`${styles.title} my-md-5`}><span>02</span>meet your crew</h1>
-        <div className={styles.wrapper}>
+        <div ref={currentTabRef} className={styles.wrapper}>
             <div className={`${styles.container} d-flex flex-column align-items-center flex-xl-row-reverse justify-content-xl-between`}>
                 <div className={styles.imgContainer}>
                 {imageUrls.map((img, i) => 
@@ -68,11 +91,9 @@ const Crew = () => {
                     </div>
                 </div>
             </div>
-            );
+            )
         </div>
         </>
-    
-       
     )        
 }
 

@@ -1,15 +1,15 @@
-import { useQuery } from '@apollo/client';
-import { technologyList } from '../../graphql/queries';
-import { useState, useEffect } from 'react'
-import { setBodyBackgroundImage } from '../Background/Background';
-import styles from './Technology.module.css'
+import { useRef, useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { technologyList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
- 
+import { ITech } from '../../interface/interfaces'
+import { gsap } from "gsap"
+import styles from './Technology.module.css'
+
 const Technology = () => {
     
-    const [currentTab, setCurrentTab] = useState('0');
-    const [isPortraitFormat, setIsPortraitFormat] = useState(true); 
-    const { loading, error, data } = useQuery(technologyList);
+    const [currentTab, setCurrentTab] = useState('0')
+    const currentTabRef = useRef(null)
     const tabs = [
     { tab: "1", id: "0" },
     { tab: "2", id: "1" },
@@ -17,43 +17,57 @@ const Technology = () => {
     ]
 
     useEffect(() => {
-    const handleResize = () => {
-        setIsPortraitFormat(window.innerWidth >= 1200);
-    }
+        const tl = gsap.timeline()
 
-    window.addEventListener('resize', handleResize);
+        tl.to(currentTabRef.current, {
+            duration: 1,
+            opacity: 0,
+            ease: 'back.out(1)',
+            y: -200,
+        })
+        tl.to(currentTabRef.current, {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+        })
+        
         return () => {
-            window.removeEventListener('resize', handleResize);
+            tl.kill()
         }
-    }, []);
+    }, [currentTab])
 
-    // useEffect(() => {
-    //     console.log("useeffect")
-    //     setBodyBackgroundImage(
-    //     '/background-technology-mobile.jpg', 
-    //     '/background-technology-tablet.jpg', 
-    //     '/background-technology-desktop.jpg');
-    //  }, []);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    if (!data) return null;
-
-    const technologyData = data.technologies.data
-    const imgFormats = isPortraitFormat ? technologyData.map(dest => dest.attributes.image.data[1].attributes.url)
-                                         : technologyData.map(dest => dest.attributes.image.data[0].attributes.url);
- 
-
-    const handleTabClick = (e) => {
-        setCurrentTab(e.target.id);
+    const [isPortraitFormat, setIsPortraitFormat] = useState(true) 
+    useEffect(() => {
+    const handleResize = () => {
+        setIsPortraitFormat(window.innerWidth >= 1200)
     }
+    window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
+    const { loading, error, data } = useQuery(technologyList)
+
+    if (loading) return <div>Loading...</div>
+    if (error) return <div>Error: {error.message}</div>
+    if (!data) return null
+    
+    const technologyData: ITech[] | undefined = data?.technologies?.data
+    const imgFormats = isPortraitFormat ? technologyData?.map((dest: ITech) => dest?.attributes?.image?.data[1]?.attributes?.url) ?? []
+                                         : technologyData?.map((dest: ITech) => dest?.attributes?.image?.data[0]?.attributes?.url) ?? []
+
+    const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const tabId = e.currentTarget.id
+        setCurrentTab(tabId)
+    }
+    
     return (
         <>
         <Navbar/>
-        <h1 className={styles.title}><span>03</span>space launch 101</h1>
-        <div className={`${styles.container} d-flex flex-column align-items-center d-xl-flex flex-xl-row-reverse justify-content-xl-between `}> 
-            <div className={`${styles.imgContainer}`}>
+        <h1 className={`${styles.title} my-md-5`}><span>03</span>space launch 101</h1>
+        <div ref={currentTabRef} className={`${styles.container} d-flex flex-column align-items-center d-xl-flex flex-xl-row-reverse justify-content-xl-between `}> 
+            <div  className={`${styles.imgContainer}`}>
                     {imgFormats.map((img, i) => (
                     <div key={i} className="">
                         {currentTab === `${i}` && (
@@ -70,14 +84,14 @@ const Technology = () => {
                     id={tab.id} 
                     disabled={currentTab === `${tab.id}`} 
                     onClick={(handleTabClick)}
-                    className={styles.tabBtn}>
+                    className={currentTab === tab.id ? `${styles.tabBtn} ${styles.tabBtnSelected}` : `${styles.tabBtn}`}>
                         {tab.tab}
                     </button>
                 )}
             </div>
             <div>
                 {technologyData.map((tech, i) =>
-                    <div key={i}  >
+                    <div ref={currentTabRef} key={i}  >
                         {currentTab === `${i}` && 
                         <div className={`${styles.textContainer}d-flex flex-column align-items-center align-items-xl-start`}>
                             <p className={`${styles.subtitle} text-center text-xl-start`}>the terminology...</p>
@@ -91,7 +105,7 @@ const Technology = () => {
             </div>
         </div>
     </>
-    );
+    )
 }
 
 export default Technology
