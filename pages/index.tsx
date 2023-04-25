@@ -10,9 +10,7 @@ function Destinations() {
   return (
     <>
       <Navbar/>
-      <div>
-          <Home />
-      </div>
+      <Home />
     </>   
   );
 }
