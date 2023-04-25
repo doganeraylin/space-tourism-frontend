@@ -1,6 +1,6 @@
 .container {
     max-width: 325px;
-    margin: 10% auto;
+    margin: 5% auto;
 }
 
 .title,
@@ -80,7 +80,6 @@
 
     .container {
         max-width: 1000px;
-        margin: 9rem auto;
     }
 
     .textContainer {
