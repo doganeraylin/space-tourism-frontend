@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { crewList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
+import Loading from '../Loading/Loading'
 import { ICrew } from '../../interface/interfaces'
 import { gsap } from "gsap"
 import styles from './Crew.module.css'
@@ -39,7 +40,7 @@ const Crew = () => {
 
     const { loading, error, data } = useQuery(crewList)
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <div><Loading/></div>
     if (error) return <div>Error: {error.message}</div>
     if (!data) return null
 

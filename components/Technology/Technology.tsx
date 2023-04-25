@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { technologyList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
+import Loading from '../Loading/Loading'
 import { ITech } from '../../interface/interfaces'
 import { gsap } from "gsap"
 import styles from './Technology.module.css'
@@ -46,10 +47,10 @@ const Technology = () => {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-
+    
     const { loading, error, data } = useQuery(technologyList)
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <div className="d-flex justify-content-center align-items-center"><Loading/></div>
     if (error) return <div>Error: {error.message}</div>
     if (!data) return null
     
