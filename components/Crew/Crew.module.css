@@ -1,11 +1,14 @@
 .container {
-    max-width: 325px;
-    margin: 5% auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tabsContainer {
-    margin: 0 auto;
-    width: 10rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
 }
 
 .imgContainer {
@@ -14,13 +17,14 @@
 }
 
 .imgContainer img {
-    max-width: 170px;
+    max-width: 100%;
+    padding: 1rem 2rem;
 }
 
 .tabBtn {
     border: none;
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     opacity: 0.17;
 }
@@ -70,7 +74,6 @@
     line-height: 1.5rem;
 }
 
-
 .title {
     font-family: var(--barlow-condensed);
     text-transform: uppercase;
@@ -86,14 +89,17 @@
     margin-right: .75rem;
 }
 
-/* media queries tablet */
+.textContainer {
+    text-align: center;
+}
+
+.bio {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
 
 @media (min-width: 768px) {
-
-    .container {
-        max-width: 460px;
-    }
-
     .imgContainer {
         border: none;
     }
@@ -107,14 +113,7 @@
     }
 }
 
-/* media queries desktop */
-
-@media (min-width: 1200px) {
-
-    .container {
-        max-width: 1100px;
-    }
-
+@media (min-width: 1024px) {
     .title {
         font-size: 2rem;
         margin: 1rem 0 1.5rem 4rem;
@@ -125,18 +124,9 @@
         max-width: 530px;
     }
 
-    .tabsContainer {
-        margin: 3rem 0 0;
-    }
-
     .tabBtn {
         width: 1rem;
         height: 1rem;
-    }
-
-    .textContainer {
-        max-width: 500px;
-        padding: 10rem 0;
     }
 
     .fullName {

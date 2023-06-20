@@ -28,9 +28,27 @@
     color: var(--white);
 }
 
-.container {
-    max-width: 325px;
-    margin: 5% auto;
+.distanceTitle,
+.travelTimeTitle {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.distance,
+.travelTime {
+    font-size: 1.2rem;
+}
+
+.container,
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tabsContainer {
+    text-align: center;
+    margin: 1.5rem 0;
 }
 
 .tabBtn {
@@ -40,6 +58,7 @@
     letter-spacing: 0.10rem;
     color: var(--light-blue);
     cursor: pointer;
+    margin: 0 0.5rem;
 }
 
 .tabBtn:hover {
@@ -74,6 +93,7 @@
 }
 
 .description {
+    text-align: center;
     text-transform: none;
     color: var(--light-blue);
     padding-bottom: 1.25rem;
@@ -81,21 +101,18 @@
     line-height: 1.5rem;
     border-bottom: 1px solid var(--border);
     font-family: var(--barlow);
+    max-width: 500px;
+    margin: 0 auto;
+
 }
 
 .destinationImg {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
-
-/* media queries tablet */
-
 @media (min-width: 768px) {
-
-    .container {
-        max-width: 520px;
-    }
 
     .title {
         font-size: 1.5rem;
@@ -105,22 +122,21 @@
         font-size: 5rem;
     }
 
-    .destinationImg {
-        max-width: 300px;
-        max-height: 300px;
+    .detailsContainer {
+        display: flex;
+        gap: 4rem;
     }
 }
 
-/* media queries desktop */
-
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
 
     .container {
-        max-width: 1100px;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
     .destinationInfoWrapper {
-        max-width: 445px;
+        max-width: 60%;
     }
 
     .title {
@@ -129,8 +145,19 @@
         text-align: left;
     }
 
-    .destinationImg {
-        max-width: 445px;
-        max-height: 445px;
+    .tabsContainer {
+        text-align: left;
+        font-size: 1.3rem;
     }
+
+    .textContainer {
+        align-items: flex-start;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+
+
 }
