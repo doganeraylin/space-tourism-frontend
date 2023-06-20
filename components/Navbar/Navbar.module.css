@@ -15,7 +15,6 @@
     line-height: 1rem;
     letter-spacing: .15rem;
     padding: 2rem 2rem .75rem;
-    max-width: 450px;
     cursor: pointer;
 }
 
@@ -46,17 +45,12 @@
     border: none;
 }
 
-
-/* media queries tablet */
-
 @media (min-width: 768px) {
 
     .navbarContainer {
         margin: 0;
     }
 }
-
-/* media queries tablet */
 
 @media (min-width: 1200px) {
 
