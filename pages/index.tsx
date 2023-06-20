@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar/Navbar';
 import Home from '../components/Home/Home'
 
-function Destinations() {
+function HomePage() {
   <Head>
     <meta name="viewport" content="initial-scale=1, width=device-width" />
   </Head>
@@ -14,4 +14,4 @@ function Destinations() {
     </>   
   );
 }
-export default Destinations 
+export default HomePage
