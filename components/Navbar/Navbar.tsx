@@ -55,9 +55,9 @@ const Navbar = () => {
             <div  className="collapse navbar-collapse d-md-flex justify-content-md-end align-items-md-start" id="navbarSupportedContent">
                 <ul  className={`${styles.linksContainer} navbar-nav my-2 my-md-0`}>
                     {links.map((link, index) => (
-                        <li  key={index}  className={`${styles.links} ${router.pathname === link.href ? styles.active : ''}`}>
+                        <li key={index} className={`${styles.links} ${router.pathname === link.href ? styles.active : ''}`}>
                             <Link  href={link.href}>
-                                <a ><span className="fw-bold me-2 d-md-none d-xl-inline">{link.pageNumber}</span>{link.text}</a>
+                                <a><span className="fw-bold me-2 d-md-none d-xl-inline">{link.pageNumber}</span>{link.text}</a>
                             </Link>
                         </li>
                     ))}

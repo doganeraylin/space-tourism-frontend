@@ -1,13 +1,33 @@
 import { useRef, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { crewList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
 import Loading from '../Loading/Loading'
-import { ICrew } from '../../interface/interfaces'
 import { gsap } from "gsap"
 import styles from './Crew.module.css'
 
-const Crew = () => {
+
+interface ICrew {
+    id: number,
+    name: string;
+    images: Img;
+    role: string;
+    bio: string;
+}
+
+interface Img {
+  png: string;
+}
+interface CrewProps {
+    crew: ICrew[];
+}
+
+
+
+
+
+
+
+const Crew = ({crew}: CrewProps) => {
   const [currentTab, setCurrentTab] = useState<string>('0')
   const currentTabRef = useRef(null) 
 
@@ -33,19 +53,13 @@ const Crew = () => {
 
     const tabs = [
     { tab: "0", id: "0" },
-    { tab: "1", id: "1" },
+    { tab: "1", id: "1" }, 
     { tab: "2", id: "2" },
     { tab: "3", id: "3" }
     ]
 
-    const { loading, error, data } = useQuery(crewList)
-
-    if (loading) return <div><Loading/></div>
-    if (error) return <div>Error: {error.message}</div>
-    if (!data) return null
-
-    const crewData: ICrew[] | undefined = data?.crews?.data
-    const imageUrls: string[] = crewData.map((crew: ICrew) => crew?.attributes?.image?.data?.attributes?.url) ?? []
+    const crewData: ICrew[] | undefined = crew || [];
+    const imageUrls: string[] = crewData.map((crew: ICrew) => crew?.images?.png) ?? []
 
     const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const tabId = e.currentTarget.id 
@@ -55,19 +69,19 @@ const Crew = () => {
     return (
         <>
         <Navbar />
-        <h1 className={`${styles.title} my-md-5`}><span>02</span>meet your crew</h1>
+        <h1 className={styles.title}><span>02</span>meet your crew</h1>
         <div ref={currentTabRef} className={styles.wrapper}>
-            <div className={`${styles.container} d-flex flex-column align-items-center flex-xl-row-reverse justify-content-xl-between`}>
+            <div className={styles.container}>
                 <div className={styles.imgContainer}>
                 {imageUrls.map((img, i) => 
-                    <div key={i} className="d-flex justify-content-center">
+                    <div key={i}>
                         {currentTab === `${i}` && 
                         <img className={`${styles.crewMemberImg}`} src={img}></img>}
                     </div>
                 )}
             </div >
-            <div className="d-xl-flex flex-xl-column-reverse">
-                <div className={`${styles.tabsContainer} d-flex justify-content-evenly my-5`}>
+            <div className={styles.columnReverse}>
+                <div className={styles.tabsContainer}>
                 {tabs.map((tab, i) =>
                     <button 
                         key={i} 
@@ -82,10 +96,10 @@ const Crew = () => {
                         {crewData.map((crewMember, i) =>
                             <div key={i}  >
                                 {currentTab === `${i}` && 
-                                <div className={`${styles.textContainer} d-flex flex-column align-items-center align-items-xl-start`}>
-                                    <p className={styles.role}>{crewMember.attributes.role}</p>
-                                    <p className={styles.fullName}>{crewMember.attributes.fullName}</p>
-                                    <p className={`${styles.bio} text-center text-xl-start`}>{crewMember.attributes.bio}</p>
+                                <div className={styles.textContainer}>
+                                    <p className={styles.role}>{crewMember.role}</p>
+                                    <p className={styles.fullName}>{crewMember.name}</p>
+                                    <p className={styles.bio}>{crewMember.bio}</p>
                                 </div>}
                             </div>
                         )}

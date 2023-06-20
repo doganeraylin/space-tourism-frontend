@@ -1,13 +1,25 @@
 import { useRef, useEffect, useState } from 'react'
-import { useQuery } from '@apollo/client'
-import { technologyList } from '../../graphql/queries'
 import Navbar from '../Navbar/Navbar'
-import Loading from '../Loading/Loading'
-import { ITech } from '../../interface/interfaces'
 import { gsap } from "gsap"
 import styles from './Technology.module.css'
 
-const Technology = () => {
+interface ITech {
+    id: number;
+    name: string
+    images: Img
+    description: string
+
+}
+    interface Img {
+        portrait: string
+        landscape: string
+    }
+  interface TechProps {
+      tech: ITech[];
+  }
+
+
+const Technology = ({tech} : TechProps) => {
     
     const [currentTab, setCurrentTab] = useState('0')
     const currentTabRef = useRef(null)
@@ -40,23 +52,18 @@ const Technology = () => {
     const [isPortraitFormat, setIsPortraitFormat] = useState(true) 
     useEffect(() => {
     const handleResize = () => {
-        setIsPortraitFormat(window.innerWidth >= 1200)
+        setIsPortraitFormat(window.innerWidth >= 1024)
     }
     window.addEventListener('resize', handleResize)
         return () => {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-    
-    const { loading, error, data } = useQuery(technologyList)
 
-    if (loading) return <div className="d-flex justify-content-center align-items-center"><Loading/></div>
-    if (error) return <div>Error: {error.message}</div>
-    if (!data) return null
-    
-    const technologyData: ITech[] | undefined = data?.technologies?.data
-    const imgFormats = isPortraitFormat ? technologyData?.map((dest: ITech) => dest?.attributes?.image?.data[1]?.attributes?.url) ?? []
-                                         : technologyData?.map((dest: ITech) => dest?.attributes?.image?.data[0]?.attributes?.url) ?? []
+    const techData: ITech[] | undefined = tech || [];
+    const imgFormats: string[] = techData?.map((tech: ITech) =>
+  isPortraitFormat ? tech?.images?.portrait: tech?.images.landscape
+) ?? [];
 
     const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const tabId = e.currentTarget.id
@@ -66,7 +73,7 @@ const Technology = () => {
     return (
         <>
         <Navbar/>
-        <h1 className={`${styles.title} my-md-5`}><span>03</span>space launch 101</h1>
+        <h1 className={styles.title}><span>03</span>space launch 101</h1>
         <div ref={currentTabRef} className={`${styles.container} d-flex flex-column align-items-center d-xl-flex flex-xl-row-reverse justify-content-xl-between `}> 
             <div  className={`${styles.imgContainer}`}>
                     {imgFormats.map((img, i) => (
@@ -77,8 +84,8 @@ const Technology = () => {
                     </div>
                 ))}
             </div>
-            <div className={`${styles.wrapper} d-flex flex-column align-items-center flex-xl-row`}>
-                <div className={`${styles.tabsContainer} d-flex justify-content-evenly flex-xl-column w-75 my-5`}>
+            <div className={styles.wrapper}>
+                <div className={styles.tabsContainer}>
                 {tabs.map((tab, i) =>
                     <button 
                     key={i} 
@@ -91,13 +98,13 @@ const Technology = () => {
                 )}
             </div>
             <div>
-                {technologyData.map((tech, i) =>
+                {techData.map((tech, i) =>
                     <div ref={currentTabRef} key={i}  >
                         {currentTab === `${i}` && 
-                        <div className={`${styles.textContainer}d-flex flex-column align-items-center align-items-xl-start`}>
-                            <p className={`${styles.subtitle} text-center text-xl-start`}>the terminology...</p>
-                            <p className={`${styles.term} text-center text-xl-start`}>{tech.attributes.term}</p>
-                            <p className={`${styles.description} text-xl-start`}>{tech.attributes.description}</p>
+                        <div className={styles.textContainer}>
+                            <p className={styles.subtitle}>the terminology...</p>
+                            <p className={styles.term}>{tech.name}</p>
+                            <p className={styles.description}>{tech.description}</p>
                         </div>
                         }
                     </div>
